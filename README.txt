@@ -1,1 +1,1 @@
-Sistema web de marcado esteganográfico
+Sistema web de marcado 
