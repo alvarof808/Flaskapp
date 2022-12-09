@@ -7,17 +7,32 @@ services:
         ports:
             - "5555:5555"
         depends_on:
-            - db_pg
+            - 'db_pg'
         volumes:
             - .:/app
         environment:
             FLASK_ENV: development
+            
     db_pg:
         image: "postgres:15.1"
         restart: always
-        ports:
-            - "5432:5432"
+        
         environment:
           POSTGRES_USER: username
           POSTGRES_PASSWORD: userpass
           POSTGRES_DB: testdb
+          POSTGRES_HOST: postgres
+          POSTGRES_HOST_AUTH_METHOD: trust
+        ports:
+            - "5432:5432"
+    pgadmin:
+        image: dpage/pgadmin4
+        environment:
+            PGADMIN_DEFAULT_EMAIL: "alvaro@alvaro.com"
+            PGADMIN_DEFAULT_PASSWORD: "alvaro"
+        ports:
+            - "80:80"
+        depends_on:
+            - db_pg
+
+   
