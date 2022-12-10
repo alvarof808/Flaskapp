@@ -1,29 +1,20 @@
+# Conexion a la base de datos
+from config import config
+from connection.db import get_connection
+
+# Framework Flask
 from flask import Flask, render_template, request, redirect, url_for, flash 
 
-from markupsafe import escape
-from flask_sqlalchemy import SQLAlchemy
-#from flask_migrate import Migrate
-
-from sqlalchemy import create_engine
-from sqlalchemy.ext.declarative import declarative_base
-from sqlalchemy.orm import sessionmaker
-#from sqlalchemy.orm import Session
-import psycopg2
+# Libreria para guardar Imágenes y documentos
 from werkzeug.utils import secure_filename
 import os
-
+# Marcado de documento
 from marcado import marca
 
-marca.leer()
-app = Flask(__name__)
-# Conexión a la base de datos
-engine = create_engine('postgresql://username:userpass@db_pg:5432/testdb')
 
-con = engine.connect()
-Session = sessionmaker(bind=engine)
-session = Session()
-app.secret_key = 'mysecret_key'
-Base = declarative_base()
+app = Flask(__name__)
+
+
 
 app.config["UPLOAD_FOLDER"] =  "static/uploads/imgs"
 ALLOWED_EXTENSIONS = set(['jpg', 'jpeg', 'docx']) 
@@ -42,49 +33,78 @@ def hello():
 # Ruta para cargar imagenes
 @app.route("/add_img", methods=['POST'])
 def add_img():
-    if request.method == 'POST':
-        file=request.files['foto']
-        print(file)
-        filename = secure_filename(file.filename)
-        if permitidos_file(filename):
-            file.save(os.path.join(app.config["UPLOAD_FOLDER"], filename))
-            pathI = "static/uploads/imgs/"+filename
-            con.execute('INSERT INTO img (name, fecha, path) VALUES(%s, %s, %s)',('prueba', '01/03/2022', pathI))
-            session.commit()
-            flash('foto agregada') 
-        #con.close()
+    try:
+        if request.method == 'POST':
+            connection = get_connection()
+            file=request.files['foto']
+            filename = secure_filename(file.filename)
+            
+            with connection.cursor() as cursor:
+                if permitidos_file(filename):
+                    file.save(os.path.join(app.config["UPLOAD_FOLDER"], filename))
+                    pathI = "static/uploads/imgs/"+filename
+                    cursor.execute('INSERT INTO img (name, fecha, path) VALUES(%s, %s, %s)',
+                               ('prueba', '01/03/2022', pathI))
+                    add_img = cursor.rowcount
+                    connection.commit()
+                    flash('foto agregada') 
+            connection.close()
+        return redirect(url_for('hello'))  
+            
+    except Exception as ex:
+        raise Exception(ex)
         
-    return redirect(url_for('hello'))
+
+
 @app.route('/')
 def index ():
     return render_template('index.html')
 
 @app.route('/add_doc', methods=['POST'])
 def agregar_documento():
-    if request.method == 'POST':
-        fullname=request.form['fullname']
-        apellido=request.form['apellido']
-        cod_alias=request.form['cod_alias']
-        con.execute('INSERT INTO alias (name, apellido, cod_alias) VALUES(%s, %s, %s)',
-        (fullname, apellido, cod_alias))
-        session.commit()
-        flash('Alias agregado')
-        #con.close()
-    return redirect(url_for('index'))
+    try:
+        if request.method == 'POST':
+            connection = get_connection()
+            with connection.cursor() as cursor:
+                # Captura todos los datos obtenidos del form 
+                fullname=request.form['fullname']
+                apellido=request.form['apellido']
+                cod_alias=request.form['cod_alias']
+                # Insertar los datos obtenidos en tabla
+                cursor.execute('INSERT INTO alias (name, apellido, cod_alias) VALUES(%s, %s, %s)',
+                (fullname, apellido, cod_alias))
+                connection.commit()
+                flash('Alias agregado')
+            connection.close()
+        return redirect(url_for('index'))
+    except Exception as ex:
+        raise Exception(ex)
 
 @app.route('/marca_doc')
 def seleccionar_documento():
-    datos =con.execute('SELECT * FROM documento').fetchall()
+    try:
+        connection = get_connection()
+        with connection.cursor() as cursor:
+            cursor.execute('SELECT * FROM documento')
+            datos = cursor.fetchall()
+        connection.close()
+        return render_template('marca.html', files = datos)
+    except Exception as ex:
+        raise Exception(ex)
     
-    print(datos)
-    return str(datos)
+    
         
-        
-
-
+# Funcion captura error 404 Paginas no encotradas
+def pagina_no_encotrada(error):
+    return "<h1>Página no encontrada</h1>", 404
   
 
 if __name__=='__main__':
-     
-    app.run(host="0.0.0.0", port=5555, debug=True)
+    app.config.from_object(config['development'])
+    
+    # Error Páginas no encontradas
+    app.register_error_handler(404, pagina_no_encotrada)
+    app.run(host="0.0.0.0", port=5555)
 
+
+#, debug=True
