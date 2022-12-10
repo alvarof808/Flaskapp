@@ -10,6 +10,8 @@ RUN pip3 install virtualenv
 
 RUN apt install tesseract-ocr -y
 RUN apt install libtesseract-dev -y
+RUN apt install cups-pdf -y
+RUN sudo apt install libreoffice -y
 RUN pip install flask-sqlalchemy Flask-Migrate psycopg2-binary
 
 WORKDIR /app
