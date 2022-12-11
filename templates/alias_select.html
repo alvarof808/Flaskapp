@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Marca Documentos</title>
+</head>
+<body>
+        <h1>Seleccione Alias</h1>
+        <form action="/marcar_documento" method="POST">
+            <tbody>
+            
+            <select>
+            {% for file in files %}
+            
+                <option value="{{file.0}}">{{ file.0 }} : {{ file.1 }}</option>
+              
+                
+                {% endfor %}
+                
+            </select>
+
+            </tbody>
+            <h1>{{ doc }}</h1>
+            <button type="submit"> Marcar Documento</button>
+        </form>
+</body>
+</html>

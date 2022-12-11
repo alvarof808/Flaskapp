@@ -27,6 +27,7 @@ documento = Table(
     'documento', meta,
     Column('id_documento', Integer, primary_key = True, autoincrement=True),
     Column('name', String),
+    Column('path', String),
     Column('fecha', Date)    
 )
 
@@ -42,6 +43,7 @@ img = Table(
     'img', meta,
     Column('id_img', Integer, primary_key = True, autoincrement=True),
     Column('name', String),
+    Column('path', String),
     Column('fecha', Date)
 )
 
@@ -59,6 +61,7 @@ marca = Table(
     Column('id_marca', Integer, primary_key = True, autoincrement=True),
     Column('id_documento_Marca', None, ForeignKey('documento_Marca.id_documento_Marca')),
     Column('id_alias', None, ForeignKey('alias.id_alias')),
+    Column('posicion', Integer),
     Column('palabra', String)
 )
 

@@ -80,7 +80,7 @@ def agregar_documento():
     except Exception as ex:
         raise Exception(ex)
 
-@app.route('/marca_doc')
+@app.route('/lista_doc')
 def seleccionar_documento():
     try:
         connection = get_connection()
@@ -88,11 +88,28 @@ def seleccionar_documento():
             cursor.execute('SELECT * FROM documento')
             datos = cursor.fetchall()
         connection.close()
-        return render_template('marca.html', files = datos)
+        return render_template('lista_doc.html', files = datos)
     except Exception as ex:
         raise Exception(ex)
     
+@app.route('/select_alias/<string:name>')
+def seleccionar_alias(name):
+    try:
+        connection = get_connection()
+        with connection.cursor() as cursor:
+            cursor.execute('SELECT * FROM alias')
+            datos = cursor.fetchall()
+        connection.close()
+        return render_template('alias_select.html', files = datos, doc =name)
+    except Exception as ex:
+        raise Exception(ex)
+
+@app.route('/marcar_documento', methods=['POST'])
+def marcar_documento():
     
+    pass
+    
+
         
 # Funcion captura error 404 Paginas no encotradas
 def pagina_no_encotrada(error):
