@@ -140,30 +140,46 @@ def getValores(ListadoM, listaP, listaE):
             print("Desconocido")
 """
  
-def verificar_Marca():
-    pass
+def verificar_Marca(marca, palabras, alias):
+    if len(palabras) <= 300:
+        if len(marca) >= 9:
+            print(alias)
+            return alias
+        else:
+            print("Desconocido")
+            return "desconocido"
+    elif len(palabras) >= 300:
+        if len(marca) >= 15:
+            print(alias)
+            return alias
+        else:
+            print("Desconocido")
+            return "desconocido"
+    
 
 
 listadoT = [['prueba', 'fecha', 'sarapastrosa'],['Quijote', 'cumbre', 'primera'] ,['graciosos,', 'reseña', 'argumento,'] , [], ['armas', 'buscar', 'deshaciendo'], ['andanzas', 'caminos', 'blancos'], [], ['respectivamente.', 'caballerescas.', 'segunda'], ['persona,', 'percibe', 'quiero'], ['quienes', 'algunos', 'romances'], ['Charcas,', 'estructurada', 'organizada'], ['1560.', 'Francisco', '860.000'], ['Audiencia', 'Charcas', 'incorporada'], ['XVIII,', 'similar.', 'masas'], ['Fueron', 'expulsados,', 'tanto'], ['virreinales', 'lograron', 'principales'], ['constituyente', 'proyecto', 'presidente'], ['siguiendo', 'hispana,', 'todos'], ['descontento,', 'Pedro', 'depuesto'], ['Posteriormente', 'aunque', 'fuera'], [], ['escasamente', 'poblado', '990.000'], ['profundas', 'desde', 'enriquecida'], ['inexistencia', 'pronunciamiento', 'forma'], ['mayor', 'mantener', 'guerra'], ['populares,', 'objetivos', 'pueblo'], ['atenuar', 'progresivamente', 'reservando'], ['partidos', 'partidos,', 'leves'], ['fines', 'fueron', 'nacionalistas'], [], ['Obrero', 'gracias', 'clase'], ['quien', 'asimismo', 'diversos'], [], [], ['elecciones', 'izquierda', 'austeridad'], ['elecciones', 'Zamora', 'presidente'], ['impuso', 'salud,', 'vicepresidente'], ['presidencia', 'Posteriormente', 'Gisbert'], ['Corte', 'Suprema', 'Justicia'], [], ['votos', 'Morales', 'Ostenta'], [], ['fundaron', 'Bolivia', 'enfermedades'], ['Imperio', 'dominio', 'capturar'], [], ['embargo,', 'cuando', 'dominio'], [], ['historia', 'Bolivia', 'resumida,'], [], [], [], ['civilizado', 'durante', 'Tiahuanaco'], [], ['Bolivia', 'imparable.', 'españoles'], ['regiones', 'independizaron', 'España.'], ['enfrentaba', 'muchas', 'minas']]
 
 print(len(listadoT))
 
-def lectura_img():
-    l = getImagenTexto("prueba1.jpeg")
+def lectura_img(img, listado, alias):
+    l = getImagenTexto(img)
     f = getParrafos(l)
     p = getPalabras(f)
     e = getValorEspacio(l)
-    getValores(listadoT, p, e)
-    pass
+    x = getValores(listado, p, e)
+    t = verificar_Marca(x, p, alias)
+    return t
+    
 
-l = getImagenTexto("/app/static/uploads/imgs/prueba1.jpeg")
+""" l = getImagenTexto("/app/static/uploads/imgs/prueba1.jpeg")
 
 f = getParrafos(l)
 p = getPalabras(f)
 #print(p)
 e = getValorEspacio(l)
 
-getValores(listadoT, p, e)
+getValores(listadoT, p, e) """
 #print(p)
 #print(len(e))
 ## Buscador de Palabras solo para pruebas

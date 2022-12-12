@@ -11,6 +11,8 @@ import docx
 import subprocess
 import PyPDF2
 
+import pickle
+
 
 
 
@@ -154,7 +156,7 @@ def getMarca(lista_palabras, doc, nombre,alias):
     doc.save(nuevo_documento)
     t = getListTxt(lista_palabras, nuevo_nombre)
     getPDF(nuevo_documento, nuevo_nombre)
-    PDF_Path = str('/app/static/uploads/pdf/'+ nuevo_nombre +'.pdf')
+    #PDF_Path = str('/app/static/uploads/pdf/'+ nuevo_nombre +'.pdf')
     return (nuevo_nombre)
 
 # Funcion para convertir .docx a .pdf
@@ -170,10 +172,11 @@ def getPDF(filename, nombre):
     return None
 # Funcion guardar en un txt
 def getListTxt(lista, nuevo):
-    txt = open('/app/static/txt/'+nuevo+".txt", "w")
-    txt.write(str(lista))
-    txt.close()
-    txt_path = '/app/static/txt/'+nuevo+".txt" 
+    with open('/app/static/txt/'+nuevo+".pickle", "wb") as f:
+    #txt.write(lista)
+    #txt.close()
+        pickle.dump(lista, f)
+    txt_path = '/app/static/txt/'+nuevo+".pickle" 
     return txt_path
 
 def marcado_docx(alias, doc):

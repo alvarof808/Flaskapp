@@ -5,7 +5,7 @@ def path_pdf(nombre):
     return x
 
 def path_txt(nombre):
-    x = str('/app/static/txt/'+nombre+'.txt')
+    x = str('/app/static/txt/'+nombre+'.pickle')
     return x
 
 def path_docx(nombre):

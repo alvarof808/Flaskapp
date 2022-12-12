@@ -7,11 +7,18 @@ from flask import Flask, render_template, request, redirect, url_for, flash
 # Libreria para fechas
 from datetime import datetime
 
+from analisis import lectura
+
 # Libreria para guardar Imágenes y documentos
 from werkzeug.utils import secure_filename
 import os
 # Marcado de documento
 from marcado import marca, direcciones
+# Lectura de img
+
+#from lectura1 import lectura
+
+import pickle
 
 
 app = Flask(__name__)
@@ -46,10 +53,18 @@ def carga_img():
         return render_template('carga_img.html', files = datos)
     except Exception as ex:
         raise Exception(ex)
-    
+
+def obtener_path_doc(id):
+    connection = get_connection()
+    with connection.cursor() as cursor:
+        cursor.execute('SELECT palabra FROM marca WHERE id_documento={0}'.format(id))
+        txts = cursor.fetchall()
+        connection.close()  
+        datos = txts
+     
+    return datos
+   
 # Ruta para cargar imagenes
-
-
 @app.route("/add_img", methods=['POST'])
 def add_img():
     try:
@@ -66,15 +81,22 @@ def add_img():
                     pathI = "static/uploads/imgs/"+filename
                     cursor.execute('INSERT INTO img (name, fecha, path) VALUES(%s, %s, %s)',
                                (fil[0], datetime.now(), pathI))
-                    
-                    add_img = cursor.rowcount
                     connection.commit()
-                    cursor.execute('SELECT palabra FROM marca WHERE id_documento={0}'.format(id_doc))
-                    txts = cursor.fetchall()
-                    
-                    #flash('foto agregada') 
+                    add_img = cursor.rowcount
+                    l = obtener_path_doc(id_doc)
+                    lista = []
+                    n = []
+                    for i in l:
+                        with open(str(i[0]), "rb") as f:
+                            alias = i[0]
+                            alias = alias[16:-7]
+                            obj = pickle.load(f)
+                            lista.append(obj)
+                            n.append(lectura.lectura_img(pathI,obj, alias)) 
+                    #open(file)
+                    #flash('foto agregada')
             connection.close()
-        return txts
+        return n
         #return redirect(url_for('hello'))  
             
     except Exception as ex:
@@ -146,9 +168,9 @@ def marcar_documento():
                 doc = querys.nombre_documento(id_doc)
                 valores = marca.marcado_docx(name_alias,doc)
                 
-                cursor.execute('INSERT INTO marca (id_documento, id_alias, posicion, palabra) VALUES(%s, %s, %s, %s)',(id_doc, alias, 0, direcciones.path_txt(valores)))
+                cursor.execute('INSERT INTO marca (id_documento, id_alias, nuevo_doc, palabra) VALUES(%s, %s, %s, %s)',(id_doc, alias,"nuevo", direcciones.path_txt(valores)))
                 connection.commit()
-               
+                
             connection.close()   
         return valores
     except Exception as ex:

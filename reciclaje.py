@@ -36,4 +36,20 @@ def add_img():
     datos =con.execute('SELECT * FROM documento').fetchall()
     
     print(datos)  """
+    
+"""for x in l:
+    for n in x:
+                            txt = open(n,"r")
+                            lista  = txt.read()
+                            txt.close()
+                            lista = lista[0:-1]
+                            lista = lista[1:]
+                            lista = lista.split("]") """
+                            
+import pickle
+
+with open("/app/static/txt/prueba1_Estefany.pickle", "rb") as f:
+    obj = pickle.load(f) 
+    
+print(obj)
         
