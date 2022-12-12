@@ -27,7 +27,7 @@ def docx_replace_regex(doc_obj, regex , replace):
                     text = regex.sub(replace, inline[i].text)
                     inline[i].text = text
                     
-# Funcion de prueba                    
+# Funcion de uso                  
 def docx_replace_regex2(doc_obj, regex , replace):
     #for p in doc_obj.paragraphs:
     #p = doc_obj.paragraphs[9]
@@ -142,21 +142,25 @@ def getSeleccion(listas):
 
 # Nro 6
 # Funcion para modificar docx con valores seleccionados
-def getMarca(lista_palabras, doc):
+def getMarca(lista_palabras, doc, nombre,alias):
     for z in range(len(doc.paragraphs)):
         if len(lista_palabras[z]) == 3:
             for i in range(3):
                 regex1 = re.compile(lista_palabras[z][i])
                 nuevo = lista_palabras[z][i] + ' '
                 docx_replace_regex2(doc.paragraphs[z], regex1 , nuevo)
-    getListTxt(lista_palabras)
-    doc.save('10.docx')
-    getPDF('10.docx')
-    return None
+    nuevo_nombre = nombre +'_'+alias
+    nuevo_documento= '/app/static/uploads/doc_marcados/'+nuevo_nombre+'.docx'
+    doc.save(nuevo_documento)
+    t = getListTxt(lista_palabras, nuevo_nombre)
+    getPDF(nuevo_documento, nuevo_nombre)
+    PDF_Path = str('/app/static/uploads/pdf/'+ nuevo_nombre +'.pdf')
+    return (nuevo_nombre)
 
 # Funcion para convertir .docx a .pdf
-def getPDF(filename):
+def getPDF(filename, nombre):
     subprocess.run(["lowriter", "--convert-to", "pdf", filename])
+    subprocess.run(["mv", nombre+'.pdf', '/app/static/uploads/pdf/'])
     #pdfFileObj = open(filename[:-5]+'.pdf', 'rb')
     #pdfReader = PyPDF2.PdfFileReader(pdfFileObj)
     #pageObj = pdfReader.getPage(0)
@@ -165,14 +169,26 @@ def getPDF(filename):
     #subprocess.run(["rm", filename[:-5] +".pdf"])
     return None
 # Funcion guardar en un txt
-def getListTxt(lista):
-    txt = open("test1.txt", "w")
+def getListTxt(lista, nuevo):
+    txt = open('/app/static/txt/'+nuevo+".txt", "w")
     txt.write(str(lista))
     txt.close()
-    return txt
-def leer():
-    print ("holalalal")
-    return "holala"
+    txt_path = '/app/static/txt/'+nuevo+".txt" 
+    return txt_path
+
+def marcado_docx(alias, doc):
+    docm = docx.Document('/app/static/uploads/documentos/'+doc +'.docx')
+    doc_name = doc
+    p = getParrafo("/app/static/uploads/documentos/"+doc+".docx")
+    p = getPalabras(p)
+    p = getMayoresCinco(p)
+    p = getUnicos(p)
+    s = getSeleccion(p)
+    x = getMarca(s, docm, doc_name, alias)
+     
+        
+    return (x)
+
 
 """ doc = docx.Document('/app/static/uploads/documentos/1.docx')
 

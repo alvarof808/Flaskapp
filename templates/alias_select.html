@@ -11,10 +11,10 @@
         <form action="/marcar_documento" method="POST">
             <tbody>
             
-            <select>
+            <select name="alias" id="alias">
             {% for file in files %}
             
-                <option value="{{file.0}}">{{ file.0 }} : {{ file.1 }}</option>
+                <option value="{{file.0}}">{{ file.0 }} : {{ file.1 }} : {{ file.3 }}</option>
               
                 
                 {% endfor %}
@@ -23,6 +23,8 @@
 
             </tbody>
             <h1>{{ doc }}</h1>
+            <input type="hidden" name="id_doc" value="{{ id }}">
+
             <button type="submit"> Marcar Documento</button>
         </form>
 </body>

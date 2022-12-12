@@ -8,7 +8,22 @@
 </head>
 <body>
         <h1>Marca de documentos</h1>
-        
+        {% with messages = get_flashed_messages() %}
+        {% if messages %}
+        {% for message in messages %}
+            <p>{{ message }}</p>
+        {% endfor %}
+        {% endif %}
+        {% endwith %}
+        <form action="/doc_add" method="POST" enctype="multipart/form-data" >
+
+            
+            <input type="file" name="doc" id="doc" accept=".docx">
+            
+            <button type="submit">
+                Cargar
+            </button>
+        </form>
             <table>
                 <th>
                     <tr>
@@ -26,8 +41,8 @@
                 <td>{{ file.1 }} </td>  
                 <td>{{ file.3 }} </td>  
                 <td>
-                    <a href="/select_alias/{{file.1}}">marcar</a>
-                    <a href="/borrar_doc/{{file.1}}">eliminar</a>
+                    <a href="/select_alias/{{file.0}}">marcar</a>
+                    <a href="/borrar_doc/{{file.0}}">eliminar</a>
                 </td>
             </tr>
             

@@ -59,9 +59,9 @@ resultado = Table(
 marca = Table(
     'marca', meta,
     Column('id_marca', Integer, primary_key = True, autoincrement=True),
-    Column('id_documento_Marca', None, ForeignKey('documento_Marca.id_documento_Marca')),
+    Column('id_documento', None, ForeignKey('documento.id_documento')),
     Column('id_alias', None, ForeignKey('alias.id_alias')),
-    Column('posicion', Integer),
+    Column('nuevo_doc', String),
     Column('palabra', String)
 )
 
