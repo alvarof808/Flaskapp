@@ -6,10 +6,11 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="icon" type="image/x-icon" href="{{url_for('static', filename='estilos/img/logohome3.png')}}" />
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>AUGUR</title>
+    <title>Augur - Alias</title>
 
     <!-- Custom fonts for this template-->
     <link href="{{url_for('static', filename='estilos/vendor/fontawesome-free/css/all.min.css')}}" rel="stylesheet" type="text/css">
@@ -60,9 +61,9 @@
                 <div id="collapseOne" class="collapse" aria-labelledby="headingOne" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
                         <h6 class="collapse-header">Funciones:</h6>
-                        <a class="collapse-item" href="mesteganografico.html">Marcado Esteganografico</a>
-                        <a class="collapse-item" href="aimagen.html">Analizar Imagen</a>
-                        <a class="collapse-item" href="#.html">Analizar PDF</a>
+                        <a class="collapse-item" href="/lista_doc ">Marcado Esteganografico</a>
+                        <a class="collapse-item" href="/carga_img">Analizar Imagen</a>
+                        <a class="collapse-item" href="/">Analizar PDF</a>
                         
                     </div>
                 </div>
@@ -80,8 +81,8 @@
                     data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
                         <h6 class="collapse-header">Funciones</h6>
-                        <a class="collapse-item" href="mesteganografico.html">Lista de Documentos</a>
-                        <a class="collapse-item" href="mesteganografico.html">Subir Documentos</a>
+                        <a class="collapse-item" href="lista_doc">Lista de Documentos</a>
+                        <a class="collapse-item" href="lista_doc">Subir Documentos</a>
 
                     </div>
                 </div>
@@ -98,8 +99,8 @@
                 <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
                         <h6 class="collapse-header">Funciones:</h6>
-                        <a class="collapse-item" href="mestego.html">Listado Alias</a>
-                        <a class="collapse-item" href="mestego.html">Crear Alias</a>
+                        <a class="collapse-item" href="list_alias">Listado Alias</a>
+                        <a class="collapse-item" href="list_alias">Crear Alias</a>
                     
                     </div>
                 </div>
@@ -293,21 +294,21 @@
             </div>
         </div>
     </div>
-    <!-- Logout Modal-->
-    <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+        <!-- Logout Modal-->
+        <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
         aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Ready to Leave?</h5>
+                    <h5 class="modal-title" id="exampleModalLabel">Listo para Irte?</h5>
                     <button class="close" type="button" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">×</span>
                     </button>
                 </div>
-                <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
+                <div class="modal-body">Seleccione "Logout" a continuación si está listo para finalizar su sesión actual.</div>
                 <div class="modal-footer">
                     <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-                    <a class="btn btn-primary" href="login.html">Logout</a>
+                    <a class="btn btn-primary" href="/login">Logout</a>
                 </div>
             </div>
         </div>

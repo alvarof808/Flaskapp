@@ -8,8 +8,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description" content="">
     <meta name="author" content="">
-    <link rel="icon" type="image/x-icon" href="img/logohome3.png" />
-    <title>Augur</title>
+    <link rel="icon" type="image/x-icon" href="{{url_for('static', filename='estilos/img/logohome3.png')}}" />
+    <title>Augur - Resultado</title>
 
     <!-- Custom fonts for this template-->
     <link href="{{url_for('static', filename='estilos/vendor/fontawesome-free/css/all.min.css')}}" rel="stylesheet" type="text/css">
@@ -60,9 +60,9 @@
                 <div id="collapseOne" class="collapse" aria-labelledby="headingOne" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
                         <h6 class="collapse-header">Funciones:</h6>
-                        <a class="collapse-item" href="mesteganografico.html">Marcado Esteganografico</a>
-                        <a class="collapse-item" href="aimagen.html">Analizar Imagen</a>
-                        <a class="collapse-item" href="#.html">Analizar PDF</a>
+                        <a class="collapse-item" href="/lista_doc">Marcado Esteganografico</a>
+                        <a class="collapse-item" href="/carga_img">Analizar Imagen</a>
+                        <a class="collapse-item" href="/">Analizar PDF</a>
                         
                     </div>
                 </div>
@@ -80,8 +80,8 @@
                     data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
                         <h6 class="collapse-header">Funciones</h6>
-                        <a class="collapse-item" href="mesteganografico.html">Lista de Documentos</a>
-                        <a class="collapse-item" href="mesteganografico.html">Subir Documentos</a>
+                        <a class="collapse-item" href="/lista_doc">Lista de Documentos</a>
+                        <a class="collapse-item" href="/lista_doc">Subir Documentos</a>
 
                     </div>
                 </div>
@@ -98,11 +98,8 @@
                 <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
                         <h6 class="collapse-header">Funciones:</h6>
-                        <a class="collapse-item" href="mestego.html">Listado Alias</a>
-                        <a class="collapse-item" href="mestego.html">Crear Alias</a>
-                        <a class="collapse-item" href="mestego.html">Editar Alias</a>
-                        <a class="collapse-item" href="mestego.html">Borrar Alias</a>
-                        
+                        <a class="collapse-item" href="list_alias">Listado Alias</a>
+                        <a class="collapse-item" href="list_alias">Crear Alias</a>                       
                     </div>
                 </div>
             </li>
@@ -167,7 +164,7 @@
                                 <h1 class="h3 mb-0 text-gray-800"></h1>
                                 <a href="{{pdf[4:]}}" class="btn-descarga d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm" ><i
                                         class="fas fa-download fw text-white-50"
-                                        download="4e73df"> </i> Descargar !!</a>
+                                        download="{{pdf[4:]}}"> </i> Descargar !!</a>
                             </div>
                             <Br>
                             <div class="card shadow mb-4">
@@ -176,7 +173,7 @@
                                 </div>
                                 <div class="card-body">
                                     <div class="table-responsive">
-                                        <p> El documento <code>{{pdf[24:]}}</code> fue marcado con el Estego-algoritmo Exitosamente </p>
+                                        <p class="h2 text-primary"> El documento <code>{{pdf[24:]}}</code> fue marcado con el Estego-algoritmo Exitosamente </p>
 
                                     </div> 
                                 </div>
@@ -208,7 +205,25 @@
     <!-- Scroll to Top Button-->
 
 </div>
-    
+        <!-- Logout Modal-->
+        <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Listo para Irte?</h5>
+                    <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">×</span>
+                    </button>
+                </div>
+                <div class="modal-body">Seleccione "Logout" a continuación si está listo para finalizar su sesión actual.</div>
+                <div class="modal-footer">
+                    <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
+                    <a class="btn btn-primary" href="/login">Logout</a>
+                </div>
+            </div>
+        </div>
+    </div>
 <!-- AQUI COMIENZA TERMINA CONTENIDO-->
     <!-- Bootstrap core JavaScript-->
     <script src="{{url_for('static', filename='estilos/vendor/jquery/jquery.min.js')}}"></script>

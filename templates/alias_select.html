@@ -4,7 +4,8 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Augur</title>
+    <link rel="icon" type="image/x-icon" href="{{url_for('static', filename='estilos/img/logohome3.png')}}" />
+    <title>Augur - Alias</title>
     <!-- Custom fonts for this template-->
     <link href="{{url_for('static', filename='estilos/vendor/fontawesome-free/css/all.min.css')}}" rel="stylesheet" type="text/css">
     <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
@@ -45,9 +46,9 @@
                     <div id="collapseOne" class="collapse" aria-labelledby="headingOne" data-parent="#accordionSidebar">
                         <div class="bg-white py-2 collapse-inner rounded">
                             <h6 class="collapse-header">Funciones:</h6>
-                            <a class="collapse-item" href="mesteganografico.html">Marcado Esteganografico</a>
-                            <a class="collapse-item" href="aimagen.html">Analizar Imagen</a>
-                            <a class="collapse-item" href="#.html">Analizar PDF</a>
+                            <a class="collapse-item" href="/lista_doc">Marcado Esteganografico</a>
+                            <a class="collapse-item" href="/caarga_img">Analizar Imagen</a>
+                            <a class="collapse-item" href="/">Analizar PDF</a>
                             
                         </div>
                     </div>
@@ -64,8 +65,8 @@
                         data-parent="#accordionSidebar">
                         <div class="bg-white py-2 collapse-inner rounded">
                             <h6 class="collapse-header">Funciones</h6>
-                            <a class="collapse-item" href="mesteganografico.html">Lista de Documentos</a>
-                            <a class="collapse-item" href="mesteganografico.html">Subir Documentos</a>
+                            <a class="collapse-item" href="/lista_doc">Lista de Documentos</a>
+                            <a class="collapse-item" href="/lista_doc">Subir Documentos</a>
     
                         </div>
                     </div>
@@ -82,10 +83,9 @@
                     <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#accordionSidebar">
                         <div class="bg-white py-2 collapse-inner rounded">
                             <h6 class="collapse-header">Funciones:</h6>
-                            <a class="collapse-item" href="mestego.html">Listado Alias</a>
-                            <a class="collapse-item" href="#.html">Crear Alias</a>
-                            <a class="collapse-item" href="#.html">Editar Alias</a>
-                            <a class="collapse-item" href="#.html">Borrar Alias</a>
+                            <a class="collapse-item" href="/list_alias">Listado Alias</a>
+                            <a class="collapse-item" href="/list_alias">Crear Alias</a>
+                            
                             
                         </div>
                     </div>
@@ -176,7 +176,7 @@
                             <input type="hidden" name="id_doc" value="{{ id }}">       
                         </div>
                         <div class="card-footer  row justify-content-center  ">
-                            <button class="btn btn-success" type="submit"> Marcar Documento</button>
+                            <button class="btn btn-success btn-sm" type="submit"> Marcar Documento</button>
                            <!--  <a href="mestegof.html" class="btn-primary btn-sm" id="submit">Marcar Documento</a>   -->                          
                         </div>
                         </form>
@@ -195,26 +195,26 @@
                         </div>
                     </footer>
 <!-- End of Footer -->
-    <!-- Logout Modal-->
-    <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+        <!-- Logout Modal-->
+        <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
         aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Seguro que quiere salir?</h5>
+                    <h5 class="modal-title" id="exampleModalLabel">Listo para Irte?</h5>
                     <button class="close" type="button" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">×</span>
                     </button>
                 </div>
-                <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
+                <div class="modal-body">Seleccione "Logout" a continuación si está listo para finalizar su sesión actual.</div>
                 <div class="modal-footer">
-                    <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancelar</button>
-                    <a class="btn btn-primary" href="login.html">Logout</a>
+                    <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
+                    <a class="btn btn-primary" href="/login">Logout</a>
                 </div>
             </div>
         </div>
     </div>
-
+    
 <!-- AQUI COMIENZA TERMINA CONTENIDO-->
     <!-- Bootstrap core JavaScript-->
     <script src="{{url_for('static', filename='estilos/vendor/jquery/jquery.min.js')}}"></script>
