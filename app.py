@@ -88,21 +88,43 @@ def add_img():
                     n = []
                     for i in l:
                         with open(str(i[0]), "rb") as f:
-                            alias = i[0]
-                            alias = alias[16:-7]
+                            alias1 = i[0]
+                            alias = alias1[16:-7]
                             obj = pickle.load(f)
-                            lista.append(obj)
+                            lista.append(alias)
                             n.append(lectura.lectura_img(pathI,obj, alias)) 
                     #open(file)
                     #flash('foto agregada')
             connection.close()
-        return n
-        #return redirect(url_for('hello'))  
+            x = marca.getEliminarRepetidos(n)
+            
+        
+        #return redirect(url_for('hello'), n) 
+        return  redirect(f'/resultado/{x}') 
             
     except Exception as ex:
         raise Exception(ex)
         
-
+# Funcion para mostrar resultado
+@app.route('/resultado/<name>')
+def mostrar_resultado(name):
+    name = name[2:-2]
+    if len(name) > 0:
+        connection = get_connection()
+        with connection.cursor() as cursor:
+            cursor.execute("SELECT a.name, a.apellido  from alias a, marca b where a.id_alias = b.id_alias and b.nuevo_doc = '{0}'".format(direcciones.path_pdf(name)))
+            t = cursor.fetchall()
+        connection.close()
+        name = name+".pdf"
+        otro = "sfasdfasd"
+    else :
+        name = "Desconocido"
+        t = None
+        otro = "Desconocido"
+   
+    #name.remove("Desconocido")
+    return render_template("resultado.html", p = t, d = name)
+    #return t
 
 @app.route('/')
 def index ():
@@ -129,6 +151,8 @@ def agregar_documento():
         return redirect(url_for('index'))
     except Exception as ex:
         raise Exception(ex)
+    
+    
 # Funcion para obtener el listado de documentos y mostrarlo en listado.html via /lista_doc
 @app.route('/lista_doc')
 def seleccionar_documento():
@@ -143,6 +167,8 @@ def seleccionar_documento():
     except Exception as ex:
         raise Exception(ex)
     
+    
+# Funcion para seleccionar el alias con el que se desea marcar el documento   
 @app.route('/select_alias/<string:name>')
 def seleccionar_alias(name):
     try:
@@ -168,13 +194,23 @@ def marcar_documento():
                 doc = querys.nombre_documento(id_doc)
                 valores = marca.marcado_docx(name_alias,doc)
                 
-                cursor.execute('INSERT INTO marca (id_documento, id_alias, nuevo_doc, palabra) VALUES(%s, %s, %s, %s)',(id_doc, alias,"nuevo", direcciones.path_txt(valores)))
+                cursor.execute('INSERT INTO marca (id_documento, id_alias, nuevo_doc, palabra) VALUES(%s, %s, %s, %s)',(id_doc, alias,direcciones.path_pdf(valores), direcciones.path_txt(valores)))
                 connection.commit()
                 
             connection.close()   
-        return valores
+        return  redirect(f'/descarga_pdf/{valores}')
     except Exception as ex:
         raise Exception(ex)
+    
+# Funcion para descargar Documento PDF
+@app.route("/descarga_pdf/<string:name>")
+def descarga_pdf(name):
+    x = direcciones.path_pdf(name)
+    return render_template("descargar_pdf.html", pdf = x)
+    
+    
+
+
     
 # Funcion para Agregar documentos en list_doc
 @app.route("/doc_add", methods=['POST'])   

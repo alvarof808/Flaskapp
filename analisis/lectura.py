@@ -130,26 +130,26 @@ def getValores(ListadoM, listaP, listaE):
     print(len(Marcas))
     if len(listaP) <= 300:
         if len(Marcas) >= 9:
-            print("Estefany es la zarapastrosa")
+            print("Estefany")
         else:
             print("Desconocido")
     elif len(listaP) >= 300:
         if len(Marcas) >= 15:
-            print("Estefany es la zarapastrosa")
+            print("Estefany ")
         else:
             print("Desconocido")
 """
  
 def verificar_Marca(marca, palabras, alias):
-    if len(palabras) <= 300:
-        if len(marca) >= 9:
+    if len(palabras) <= 370:
+        if len(marca) >= 7:
             print(alias)
             return alias
         else:
             print("Desconocido")
             return "desconocido"
-    elif len(palabras) >= 300:
-        if len(marca) >= 15:
+    elif len(palabras) >= 371:
+        if len(marca) >= 12:
             print(alias)
             return alias
         else:

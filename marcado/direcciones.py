@@ -4,6 +4,8 @@ def path_pdf(nombre):
     x = str('/app/static/uploads/pdf/'+nombre+'.pdf')
     return x
 
+
+
 def path_txt(nombre):
     x = str('/app/static/txt/'+nombre+'.pickle')
     return x
