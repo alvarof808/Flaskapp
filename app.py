@@ -125,10 +125,50 @@ def mostrar_resultado(name):
     #name.remove("Desconocido")
     return render_template("resultado.html", p = t, d = name)
     #return t
-
+# Route que envia al home de la app
 @app.route('/')
 def index ():
     return render_template('index.html')
+
+
+@app.route('/list_alias')
+def lista_alias():
+    try:
+        connection = get_connection()
+        with connection.cursor() as cursor:
+            cursor.execute('SELECT * FROM alias')
+            datos = cursor.fetchall()
+        connection.close()
+        
+        return render_template('list_alias.html', files = datos)
+    except Exception as ex:
+        raise Exception(ex)
+    
+    
+
+#Funcion para agregar alias
+@app.route('/add_alias', methods=['POST'])
+def agregar_alias():
+    try:
+        if request.method == 'POST':
+            connection = get_connection()
+            with connection.cursor() as cursor:
+                # Captura todos los datos obtenidos del form 
+                fullname=request.form['fullname']
+                apellido=request.form['apellido']
+                
+                cod_alias=fullname[0:3].lower()+"_"+apellido[0:3].lower()
+                # Insertar los datos obtenidos en tabla
+                cursor.execute('INSERT INTO alias (name, apellido, cod_alias) VALUES(%s, %s, %s)',
+                (fullname, apellido, cod_alias))
+                connection.commit()
+                flash('Alias agregado')
+            connection.close()
+        return redirect(url_for('lista_alias'))
+    except Exception as ex:
+        raise Exception(ex)
+    
+    pass
 
 
 # Funcion para insertar valores en tabla Alias
@@ -141,7 +181,8 @@ def agregar_documento():
                 # Captura todos los datos obtenidos del form 
                 fullname=request.form['fullname']
                 apellido=request.form['apellido']
-                cod_alias=request.form['cod_alias']
+                
+                cod_alias=fullname[0:3].lower()+"_"+apellido[0:3].lower()
                 # Insertar los datos obtenidos en tabla
                 cursor.execute('INSERT INTO alias (name, apellido, cod_alias) VALUES(%s, %s, %s)',
                 (fullname, apellido, cod_alias))
@@ -240,12 +281,16 @@ def add_doc():
     except Exception as ex:
         raise Exception(ex)
 
+#Route login
+@app.route('/login')
+def login():
+    return render_template("login.html")
 
 
         
 # Funcion captura error 404 Paginas no encotradas
 def pagina_no_encotrada(error):
-    return "<h1>Página no encontrada</h1>", 404
+    return render_template("404.html"), 404
   
 
 if __name__=='__main__':
