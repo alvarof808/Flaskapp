@@ -96,11 +96,17 @@ def add_img():
                     #open(file)
                     #flash('foto agregada')
             connection.close()
-            x = marca.getEliminarRepetidos(n)
+            t = list(n)
+            teff = None
+            for i in t:
+                if i != "desconocido":
+                    teff = i
+                
+            #x = marca.getEliminarRepetidos(n)
             
         
         #return redirect(url_for('hello'), n) 
-        return  redirect(f'/resultado/{x}') 
+        return  redirect(f'/resultado/{teff}') 
             
     except Exception as ex:
         raise Exception(ex)
@@ -108,11 +114,12 @@ def add_img():
 # Funcion para mostrar resultado
 @app.route('/resultado/<name>')
 def mostrar_resultado(name):
-    name = name[2:-2]
-    if len(name) > 0:
+    #name = name[2:-2]
+    if name != None:
         connection = get_connection()
         with connection.cursor() as cursor:
-            cursor.execute("SELECT a.name, a.apellido  from alias a, marca b where a.id_alias = b.id_alias and b.nuevo_doc = '{0}'".format(direcciones.path_pdf(name)))
+            #cursor.execute("SELECT a.name, a.apellido  from alias a, marca b where a.id_alias = b.id_alias and b.nuevo_doc ='{0}'".format(direcciones.path_pdf(name)))
+            cursor.execute("SELECT a.name, a.apellido  from alias a, marca b where a.id_alias = b.id_alias and b.nuevo_doc = '{0}';".format(direcciones.path_pdf(name)))
             t = cursor.fetchall()
         connection.close()
         name = name+".pdf"
@@ -121,7 +128,7 @@ def mostrar_resultado(name):
         name = "Desconocido"
         t = None
         otro = "Desconocido"
-   
+    #t = "desconocido"
     #name.remove("Desconocido")
     return render_template("resultado.html", p = t, d = name)
     #return t
