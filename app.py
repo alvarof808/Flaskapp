@@ -2,8 +2,16 @@
 from config import config
 from connection.db import get_connection
 from database import querys
+
+
+from database.models.ModelUser import ModelUser
+from database.models.entities.User import User
 # Framework Flask
 from flask import Flask, render_template, request, redirect, url_for, flash 
+
+from flask_wtf.csrf import CSRFProtect
+
+from flask_login import LoginManager, login_user, logout_user, login_required
 # Libreria para fechas
 from datetime import datetime
 
@@ -22,12 +30,16 @@ import pickle
 
 
 app = Flask(__name__)
+csrf = CSRFProtect()
 
+login_manager_app = LoginManager(app)
 
 
 app.config["UPLOAD_FOLDER"] =  "static/uploads/imgs"
 app.config["UPLOAD_DOCX"] = "static/uploads/documentos"
 ALLOWED_EXTENSIONS = set(['jpg', 'jpeg', 'docx']) 
+
+
 
 
 # Funcion para limitar tipos de archivos que acepta el sistema
@@ -113,6 +125,7 @@ def add_img():
         
 # Funcion para mostrar resultado
 @app.route('/resultado/<name>')
+@login_required
 def mostrar_resultado(name):
     #name = name[2:-2]
     if name != None:
@@ -125,6 +138,7 @@ def mostrar_resultado(name):
         name = name+".pdf"
         otro = "sfasdfasd"
     else :
+        # Aqui se encontro a los desconocidos 11-12-2022
         name = "Desconocido"
         t = None
         otro = "Desconocido"
@@ -132,13 +146,50 @@ def mostrar_resultado(name):
     #name.remove("Desconocido")
     return render_template("resultado.html", p = t, d = name)
     #return t
-# Route que envia al home de la app
+
 @app.route('/')
-def index ():
+def index():
+    return redirect(url_for('login'))
+
+
+@login_manager_app.user_loader
+def load_user(id):
+    return ModelUser.get_by_id(id)
+
+# Route que envia al home de la app
+@app.route('/login', methods=['GET', 'POST'])
+def login():
+    if request.method =="POST":
+        
+        user = User(0, request.form['username'], request.form['password'])
+        logged_user = ModelUser.login(user)
+        if logged_user != None:
+            if logged_user.password:
+                login_user(logged_user)
+                return redirect(url_for('home'))
+            else:
+                flash("Contraseña invalida...")
+                return render_template('login.html')
+        else:
+            flash("Usuario no encontrado...")
+            return render_template('login.html')
+    else:
+        return render_template('login.html')
+
+# Funcion Logout
+@app.route('/logout')
+def logout():
+    logout_user()
+    return redirect(url_for('login'))
+
+@app.route('/home')
+@login_required
+def home():
     return render_template('index.html')
 
 
 @app.route('/list_alias')
+@login_required
 def lista_alias():
     try:
         connection = get_connection()
@@ -203,6 +254,7 @@ def agregar_documento():
     
 # Funcion para obtener el listado de documentos y mostrarlo en listado.html via /lista_doc
 @app.route('/lista_doc')
+@login_required
 def seleccionar_documento():
     try:
         connection = get_connection()
@@ -218,6 +270,7 @@ def seleccionar_documento():
     
 # Funcion para seleccionar el alias con el que se desea marcar el documento   
 @app.route('/select_alias/<string:name>')
+@login_required
 def seleccionar_alias(name):
     try:
         connection = get_connection()
@@ -252,6 +305,7 @@ def marcar_documento():
     
 # Funcion para descargar Documento PDF
 @app.route("/descarga_pdf/<string:name>")
+@login_required
 def descarga_pdf(name):
     x = direcciones.path_pdf(name)
     return render_template("descargar_pdf.html", pdf = x)
@@ -289,11 +343,12 @@ def add_doc():
         raise Exception(ex)
 
 #Route login
-@app.route('/login')
-def login():
-    return render_template("login.html")
+#@app.route('/login')
+#def login():
+#     return render_template("login.html")
 
-
+def status_401(error):
+    return redirect(url_for('login'))
         
 # Funcion captura error 404 Paginas no encotradas
 def pagina_no_encotrada(error):
@@ -302,9 +357,10 @@ def pagina_no_encotrada(error):
 
 if __name__=='__main__':
     app.config.from_object(config['development'])
-    
+    #csrf.init_app(app)
     # Error Páginas no encontradas
     app.register_error_handler(404, pagina_no_encotrada)
+    app.register_error_handler(401, status_401)
     app.run(host="0.0.0.0", port=5555)
 
 

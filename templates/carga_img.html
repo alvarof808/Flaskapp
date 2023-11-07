@@ -1,421 +1,78 @@
-<!DOCTYPE html>
-<html lang="en">
+{% extends './base_home.html' %}
 
-<head>
+{% block title %} Augur - Cargar {% endblock %}
 
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <link rel="icon" type="image/x-icon" href="{{url_for('static', filename='estilos/img/logohome3.png')}}" />
-    <meta name="description" content="">
-    <meta name="author" content="">
+{% block body %}
 
-    <title>AUGUR</title>
+<!-- Begin Page Content -->
+<div class="container-fluid">
+    <!-- Outer Row -->
+<div class="row justify-content-center">
+<div class="container-fluid">
+    <div class="row justify-content-center">
+      
+            
+                <div class="card position-relative">
+                    <div class="card-header py-3">
+                        <h6 class="m-12 font-weight-bold text-primary">Seleccione Documento</h6>
 
-    <!-- Custom fonts for this template-->
-    <link href="{{url_for('static', filename='estilos/vendor/fontawesome-free/css/all.min.css')}}" rel="stylesheet" type="text/css">
-    <link
-        href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
-        rel="stylesheet">
-        
-    <!-- Custom styles for this template-->
-    <link href="{{url_for('static', filename='estilos/css/sb-admin-2.min.css')}}" rel="stylesheet">
-        <!-- Custom styles for this page -->
-        <link href="{{url_for('static', filename='estilos/vendor/datatables/dataTables.bootstrap4.min.css')}}" rel="stylesheet">
-
-</head>
-
-<body id="page-top">
-
-<!-- AQUI COMIENZA CONTENIDO-->
-
-
-<div id="wrapper"><!-- inicio primer div wrapper-->
-    
-<!-- Inicio Sidebar (menu lateral) -->
-            <ul class="navbar-nav bg-primary sidebar sidebar-dark accordion" id="accordionSidebar">
-             <!-- Sidebar - Logo -->
-             <hr>
-             
-                    <a class="sidebar-brand d-flex align-items-center justify-content-center" href="/">
-                    <div class=" align-items-center">
-                            <img class="" height="120px" width="99px" 
-                            src="{{url_for('static', filename='estilos/img/augurL.png')}}">
-                    </div>  
-                    </a>
-            <hr>
-            <!-- Divisor -->
-            <hr class="sidebar-divider my-1">
-
-            <!-- Heading -->
-            <div class="sidebar-heading">
-                Menu
-            </div>
-
-            <!-- Menu de Estenografia Nav Item - Pages Collapse Menu -->
-            <li class="nav-item">
-                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseOne"
-                    aria-expanded="true" aria-controls="collapseOne">
-                    <i class="far fa-fw fa-clone"></i>
-                    <span>Esteganografia</span>
-                </a>
-                <div id="collapseOne" class="collapse" aria-labelledby="headingOne" data-parent="#accordionSidebar">
-                    <div class="bg-white py-2 collapse-inner rounded">
-                        <h6 class="collapse-header">Funciones:</h6>
-                        <a class="collapse-item" href="/lista_doc">Marcado Esteganografico</a>
-                        <a class="collapse-item" href="/carga_img">Analizar Imagen</a>
-                        <a class="collapse-item" href="/">Analizar PDF</a>
-                        
-                    </div>
-                </div>
-            </li>
-            <!-- Fin Menu de Estenografia -->
-
-            <!-- Nav Item Menu Documentos- Documentos Collapse Menu -->
-            <li class="nav-item">
-                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseDocumentos"
-                    aria-expanded="true" aria-controls="collapseDocumentos">
-                    <i class="far fa-fw fa-file-alt"></i>
-                    <span>Documentos</span>
-                </a>
-                <div id="collapseDocumentos" class="collapse" aria-labelledby="headingDocumentos"
-                    data-parent="#accordionSidebar">
-                    <div class="bg-white py-2 collapse-inner rounded">
-                        <h6 class="collapse-header">Funciones</h6>
-                        <a class="collapse-item" href="/lista_doc ">Lista de Documentos</a>
-                        <a class="collapse-item" href="/lista_doc">Subir Documentos</a>
-
-                    </div>
-                </div>
-            </li>
-            <!-- Fin Menu Documentos -->
-
-            <!-- Menu de Alias Nav Item - Pages Collapse Menu -->
-            <li class="nav-item">
-                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseThree"
-                    aria-expanded="true" aria-controls="collapseThree">
-                    <i class="far fa-fw fa-clipboard"></i>
-                    <span>Alias</span>
-                </a>
-                <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#accordionSidebar">
-                    <div class="bg-white py-2 collapse-inner rounded">
-                        <h6 class="collapse-header">Funciones:</h6>
-                        <a class="collapse-item" href="/list_alias">Listado Alias</a>
-                        <a class="collapse-item" href="/list_alias">Crear Alias</a>               
-                    </div>
-                </div>
-            </li>
-<!--Fin Menu de Alias -->
-                <!-- Sidebar Toggler (boton retractor de menu) -->
-                <div class="text-center d-none d-md-inline">
-                    <button class="rounded-circle border-0" id="sidebarToggle"></button>
-</li>
-            </ul> <!-- Fin Sidebar (menu lateral) -->
-<!-- INICIO PAGINA -->
-<div id="content-wrapper" class="d-flex flex-column">
-                <div id="content"> <!-- Content -->
-                        <!-- Topbar -->
-                        <nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
-                    
-                            <!-- Sidebar Toggle (Topbar) -->
-                            <button id="sidebarToggleTop" class="btn btn-link d-md-none rounded-circle mr-3">
-                                <i class="fa fa-file"></i>
+                        <div class="card-header-pills">
+                        <!-- <div class="dropdown ">
+                            <button class="btn btn-primary dropdown-toggle" type="button"
+                                id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                Seleccionar
                             </button>
+                            <div class="dropdown-menu animated--fade-in"
+                                aria-labelledby="dropdownMenuButton">
+                                <a class="dropdown-item" href="#">Doc 1</a>
+                                <a class="dropdown-item" href="#">Doc 2</a>
+                                <a class="dropdown-item" href="#">Doc 3</a>
+                            </div>
+                        </div> -->
+                        <form action="/add_img" method="POST" enctype="multipart/form-data" >
+
+                            <select name="doc" id="doc">
+                                {% for file in files %}
                                 
-                                <!-- Topbar Navbar -->
-                                <ul class="navbar-nav ml-auto">
-                                    <div class="topbar-divider d-none d-sm-block"></div>
-                                    <!-- Nav Item - User Information -->
-                                        <li class="nav-item dropdown no-arrow">
-                                            <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
-                                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                                <span class="mr-2 d-none d-lg-inline text-gray-600 small">Alvaro Flores</span>
-                                                <img class="img-profile rounded-circle"
-                                                    src="{{url_for('static', filename='estilos/img/undraw_profile.svg')}}">
-                                            </a>
-                                            <!-- Dropdown - User Information -->
-                                            <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
-                                                aria-labelledby="userDropdown">
-                                                <a class="dropdown-item" href="#">
-                                                    <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
-                                                    Profile
-                                                </a>
-                                                <a class="dropdown-item" href="#">
-                                                    <i class="fas fa-cogs fa-sm fa-fw mr-2 text-gray-400"></i>
-                                                    Settings
-                                                </a>
-                                                <a class="dropdown-item" href="#">
-                                                    <i class="fas fa-list fa-sm fa-fw mr-2 text-gray-400"></i>
-                                                    Activity Log
-                                                </a>
-                                                <div class="dropdown-divider"></div>
-                                                    <a class="dropdown-item" href="#" data-toggle="modal" data-target="#logoutModal">
-                                                        <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
-                                                        Logout
-                                                    </a>
-                                            </div>
-                                        </li>
-                        
-                                </ul>
-                        </nav><!-- End of Topbar -->
-<!-- Editar de aqui -->
-                <!-- Begin Page Content -->
-                        <div class="container-fluid">
-                                <!-- Outer Row -->
-                        <div class="row justify-content-center">
-                            <div class="container-fluid">
-                                <div class="row justify-content-center">
+                                    <option value="{{file.0}}">{{ file.0 }} : {{ file.1 }} </option>
                                   
-                                        
-                                            <div class="card position-relative">
-                                                <div class="card-header py-3">
-                                                    <h6 class="m-12 font-weight-bold text-primary">Seleccione Documento</h6>
-
-                                                    <div class="card-header-pills">
-                                                    <!-- <div class="dropdown ">
-                                                        <button class="btn btn-primary dropdown-toggle" type="button"
-                                                            id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                                            Seleccionar
-                                                        </button>
-                                                        <div class="dropdown-menu animated--fade-in"
-                                                            aria-labelledby="dropdownMenuButton">
-                                                            <a class="dropdown-item" href="#">Doc 1</a>
-                                                            <a class="dropdown-item" href="#">Doc 2</a>
-                                                            <a class="dropdown-item" href="#">Doc 3</a>
-                                                        </div>
-                                                    </div> -->
-                                                    <form action="/add_img" method="POST" enctype="multipart/form-data" >
-
-                                                        <select name="doc" id="doc">
-                                                            {% for file in files %}
-                                                            
-                                                                <option value="{{file.0}}">{{ file.0 }} : {{ file.1 }} </option>
-                                                              
-                                                                
-                                                                {% endfor %}
-                                                                
-                                                        </select>
-                                                        <input type="file" name="foto" id="foto" accept=".jpg .jpeg">
-                                                        
-                                                        
-                                                    
+                                    
+                                    {% endfor %}
+                                    
+                            </select>
+                            <input type="file" name="foto" id="foto" accept=".jpg .jpeg">
+                            
+                            
+                        
 
 
-                                                </div>
-                                                
-                                            </div>
-                                        <div class=" row justify-content-center">
-                                            <img class="" hspace="300px" vspace="32px" height="400px" width="400px" src="{{url_for('static', filename='estilos/img/logohome5.png')}}">
-
-                                        </div>
-                                        
-                                
-                            </div><!-- fin container-fluid -->
-                    </div><!-- fin Content wrapper --> 
-                        </div>
                     </div>
-                </div><!-- /.container-fluid --> 
+                    
+                </div>
+            <div class=" row justify-content-center">
+                <img class="" hspace="300px" vspace="32px" height="400px" width="400px" src="{{url_for('static', filename='estilos/img/logohome5.png')}}">
+
             </div>
-    <a class="scroll-to-top rounded" href="#page-top">
-        <i class="fas fa-angle-up"></i>
-    </a>
-    <div class=" row justify-content-center">
-        <!-- <a href="#" class="btn btn-group btn-secondary btn-icon-split "  data-toggle="modal" data-target="#subirimagen">
-            <span class="icon text-white-50">
-                <i class="far fa-file-image fa-fw"></i>
-            </span>
-            <span class="text">Subir Imagen</span>
-        </a> -->
-        <button class="btn btn-primary" type="submit">
-            Analizar
-        </button>
-    </form>
-    </div>
-<div class=" row justify-content-center"> 
-        <!-- <a href="aimagenf.html" class="btn btn-group btn-success secondary btn-icon-split"  >
-            <span class="icon text-white-50">
-                <i class="far fa-file-image fa-fw"></i>
-            </span>
-            <span class="text">Analizar Imagen</span>
-        </a> -->
+            
+            <a class="scroll-to-top rounded" href="#page-top">
+                <i class="fas fa-angle-up"></i>
+            </a>
+            <div class=" row justify-content-center">
+                <!-- <a href="#" class="btn btn-group btn-secondary btn-icon-split "  data-toggle="modal" data-target="#subirimagen">
+                    <span class="icon text-white-50">
+                        <i class="far fa-file-image fa-fw"></i>
+                    </span>
+                    <span class="text">Subir Imagen</span>
+                </a> -->
+                <button class="btn btn-primary" type="submit">
+                    Analizar
+                </button>
+            </form>
+            </div>
+</div><!-- fin container-fluid -->
+</div><!-- fin Content wrapper --> 
 </div>
-<!-- Footer -->
-                <footer class="sticky-footer bg-white">
-                    <div class="container my-auto">
-                        <div class="copyright text-center my-auto">
-                            <span>Copyright &copy; AUGUR <sup>2022</sup></span>
-                        </div>
-                    </div>
-                </footer>
-                <!-- End of Footer -->
-</div><!-- fin primer div wrapper-->
-
-    <!-- Scroll to Top Button-->
-
 </div>
+</div><!-- /.container-fluid --> 
 
-    <!-- Subir Imagen Modal-->
-    <div class="modal fade" id="subirimagen" tabindex="-1" role="dialog" aria-labelledby="subirimagen"
-        aria-hidden="true">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="subirimagen">Subir Imagen</h5>
-                    <button class="close" type="button" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">×</span>
-                    </button>
-                </div>
-                <div class="modal-body">Seleccionar Imagen ....</div>
-                <div class="modal-footer">
-                    <form >
-                        <input type="file" value="jpg">
-                    </form>
-                    <button class="btn btn-danger" type="button" data-dismiss="modal">Cancel</button>
-                </div>
-            </div>
-        </div>
-    </div>
-    <!-- Escoger doc opcion 1 Modal-->
-    <div class="modal fade" id="DocModal" tabindex="-1" role="dialog" aria-labelledby="DocModal"
-        aria-hidden="true">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h6 class="modal-title" id="DocModal">Escoger Archivo</h6>
-                    <button class="close" type="button" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">×</span>
-                    </button>
-                </div>
-                <div class="modal-body">
-                            <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
-                                <thead>
-                                    <tr>
-                                        <th>Nombre</th>
-                                        <th>Fecha de Subida</th>
-                                        <th>Acciones</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr>
-                                        <td>Contrato de Servicios Datacom.SRL</td>
-                                        <td>10-02-2022</td>
-                                        <td> 
-                                            <a href="#.html" class="btn btn-secondary btn-circle btn-sm">
-                                                <i class="fas fa-check-double"></i>
-                                            </a>                                
-                                        </td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </div> 
-                        <div class="modal-footer">
-                            <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-                        </div>
-                </div>
-
-            </div>
-    </div>
-
-        <!-- Escoger doc opcion 1 Modal-->
-    <div class="modal fade" id="DocModal" tabindex="-1" role="dialog" aria-labelledby="DocModal"
-        aria-hidden="true">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h6 class="modal-title" id="DocModal">Escoger Archivo</h6>
-                    <button class="close" type="button" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">×</span>
-                    </button>
-                </div>
-                <div class="modal-body">
-                            <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
-                                <thead>
-                                    <tr>
-                                        <th>Nombre</th>
-                                        <th>Fecha de Subida</th>
-                                        <th>Acciones</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr>
-                                        <td>Contrato de Servicios Datacom.SRL</td>
-                                        <td>10-02-2022</td>
-                                        <td> 
-                                            <a href="#.html" class="btn btn-secondary btn-circle btn-sm">
-                                                <i class="fas fa-check-double"></i>
-                                            </a>                                
-                                        </td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </div> 
-                        <div class="modal-footer">
-                            <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-                        </div>
-                </div>
-
-            </div>
-    </div>
-    </div>
-    <!-- Logout Modal-->
-    <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-        aria-hidden="true">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Ready to Leave?</h5>
-                    <button class="close" type="button" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">×</span>
-                    </button>
-                </div>
-                <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
-                <div class="modal-footer">
-                    <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-                    <a class="btn btn-primary" href="login.html">Logout</a>
-                </div>
-            </div>
-        </div>
-    </div>
-            <!-- Logout Modal-->
-            <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-            aria-hidden="true">
-            <div class="modal-dialog" role="document">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title" id="exampleModalLabel">Listo para Irte?</h5>
-                        <button class="close" type="button" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">×</span>
-                        </button>
-                    </div>
-                    <div class="modal-body">Seleccione "Logout" a continuación si está listo para finalizar su sesión actual.</div>
-                    <div class="modal-footer">
-                        <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-                        <a class="btn btn-primary" href="/login">Logout</a>
-                    </div>
-                </div>
-            </div>
-        </div>
-<!-- AQUI COMIENZA TERMINA CONTENIDO-->
-    <!-- Bootstrap core JavaScript-->
-    <script src="{{url_for('static', filename='estilos/vendor/jquery/jquery.min.js')}}"></script>
-    <script src="{{url_for('static', filename='estilos/vendor/bootstrap/js/bootstrap.bundle.min.js')}}"></script>
-
-    <!-- Core plugin JavaScript-->
-    <script src="{{url_for('static', filename='estilos/vendor/jquery-easing/jquery.easing.min.js')}}"></script>
-
-    <!-- Custom scripts for all pages-->
-    <script src="{{url_for('static', filename='estilos/js/sb-admin-2.min.js')}}"></script>
-
-    <!-- Page level plugins -->
-    <script src="{{url_for('static', filename='estilos/vendor/chart.js/Chart.min.js')}}"></script>
-    <!-- Page level plugins -->
-    <script src="{{url_for('static', filename='estilos/vendor/datatables/jquery.dataTables.min.js')}}"></script>
-    <script src="{{url_for('static', filename='estilos/vendor/datatables/dataTables.bootstrap4.min.')}}"></script>
-
-    <!-- Page level custom scripts -->
-    <script src="{{url_for('static', filename='estilos/js/demo/chart-area-demo.js')}}"></script>
-    <script src="{{url_for('static', filename='estilos/js/demo/chart-pie-demo.js')}}"></script>
-
-</body>
-
-</html>
+{% endblock %}

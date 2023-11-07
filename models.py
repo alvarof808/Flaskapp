@@ -1,10 +1,13 @@
 from sqlalchemy import create_engine, MetaData
 from sqlalchemy import Table, Column, Date, Integer, String, ForeignKey
 
+
 engine = create_engine('postgresql://username:userpass@db_pg:5432/testdb')
 
 
 meta = MetaData(engine)
+
+conn = engine.connect()
 
 usuario = Table(
     'usuario', meta,
@@ -12,8 +15,12 @@ usuario = Table(
     Column('name', String),
     Column('apellido', String),
     Column('username', String),
-    Column('pass', String)
+    Column('password', String)
 )
+
+conn.execute(usuario.insert(), [
+    {'name':'Alvaro', 'apellido':'Flores','username':'alvarof','password':'pbkdf2:sha256:260000$3vPGoRItkA3DH98l$2630fb3a2c18f20093bdf79589e23861ba7af04457c5f747dd20c8421ff58e74'}
+])
 
 alias = Table(
     'alias', meta,

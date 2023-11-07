@@ -70,7 +70,7 @@
                                         Activity Log
                                     </a>
                                     <div class="dropdown-divider"></div>
-                                        <a class="dropdown-item" href="#" data-toggle="modal" data-target="#logoutModal">
+                                        <a class="dropdown-item" href="{{ url_for('logout') }}" data-toggle="modal" data-target="#logoutModal">
                                             <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
                                             Logout
                                         </a>
@@ -113,7 +113,7 @@
                                                 <span class="text">Marcado Esteganografico</span>
                                             </a>
                                             <hr>
-                                            <a href="#" class="btn btn-success btn-icon-split btn-lg">
+                                            <a href="#" class="btn btn-success btn-icon-split btn-lg" disabled>
                                                 <span class="icon text-white-50">
                                                     <i class="fa fa-file-pdf fa-fw"></i>
                                                 </span>
@@ -166,7 +166,7 @@
                 <div class="modal-body">Seleccione "Logout" a continuación si está listo para finalizar su sesión actual.</div>
                 <div class="modal-footer">
                     <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-                    <a class="btn btn-primary" href="/login">Logout</a>
+                    <a class="btn btn-primary" href="{{ url_for('logout') }}">Logout</a>
                 </div>
             </div>
         </div>

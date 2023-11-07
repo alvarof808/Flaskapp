@@ -27,7 +27,9 @@ RUN pip3 --no-cache-dir install -r requirements.txt
 RUN apt install cups-pdf -y
 RUN apt install libreoffice -y
 EXPOSE 5555
+#RUN python3 models.py
+RUN [ "python3", "models.py" ]
 
-CMD [ "python3", "models.py" ]
+#CMD [ "python3", "models.py" ]
 CMD [ "python3", "app.py" ]
 

@@ -1,339 +1,96 @@
-<!DOCTYPE html>
-<html lang="en">
+{% extends './base_home.html' %}
 
-<head>
+{% block title %} Augur - Listado de Alias {% endblock %}
 
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <link rel="icon" type="image/x-icon" href="{{url_for('static', filename='estilos/img/logohome3.png')}}" />
-    <meta name="description" content="">
-    <meta name="author" content="">
+{% block body %}
 
-    <title>Augur - Alias</title>
-
-    <!-- Custom fonts for this template-->
-    <link href="{{url_for('static', filename='estilos/vendor/fontawesome-free/css/all.min.css')}}" rel="stylesheet" type="text/css">
-    <link
-        href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
-        rel="stylesheet">
-
-    <!-- Custom styles for this template-->
-    <link href="{{url_for('static', filename='estilos/css/sb-admin-2.min.css')}}" rel="stylesheet">
-        <!-- Custom styles for this page -->
-        <link href="{{url_for('static', filename='estilos/vendor/datatables/dataTables.bootstrap4.min.css')}}" rel="stylesheet">
-
-</head>
-
-<body id="page-top">
-
-<!-- AQUI COMIENZA CONTENIDO-->
-
-
-<div id="wrapper"><!-- inicio primer div wrapper-->
-    
-<!-- Inicio Sidebar (menu lateral) -->
-            <ul class="navbar-nav bg-primary sidebar sidebar-dark accordion" id="accordionSidebar">
-            <!-- Sidebar - Logo -->
-            <hr>
-                    <a class="sidebar-brand d-flex align-items-center justify-content-center" href="/">
-                    <div class=" align-items-center">
-                            <img class="" height="120px" width="99px" 
-                            src="{{url_for('static', filename='estilos/img/augurL.png')}}">
-                    </div>  
-                    </a>
-            <hr>
-            <!-- Divisor -->
-            <hr class="sidebar-divider my-1">
-
-            <!-- Heading -->
-            <div class="sidebar-heading">
-                Menu
-            </div>
-
-            <!-- Menu de Estenografia Nav Item - Pages Collapse Menu -->
-            <li class="nav-item">
-                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseOne"
-                    aria-expanded="true" aria-controls="collapseOne">
-                    <i class="far fa-fw fa-clone"></i>
-                    <span>Esteganografia</span>
-                </a>
-                <div id="collapseOne" class="collapse" aria-labelledby="headingOne" data-parent="#accordionSidebar">
-                    <div class="bg-white py-2 collapse-inner rounded">
-                        <h6 class="collapse-header">Funciones:</h6>
-                        <a class="collapse-item" href="/lista_doc ">Marcado Esteganografico</a>
-                        <a class="collapse-item" href="/carga_img">Analizar Imagen</a>
-                        <a class="collapse-item" href="/">Analizar PDF</a>
-                        
-                    </div>
-                </div>
-            </li>
-            <!-- Fin Menu de Estenografia -->
-
-            <!-- Nav Item Menu Documentos- Documentos Collapse Menu -->
-            <li class="nav-item">
-                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseDocumentos"
-                    aria-expanded="true" aria-controls="collapseDocumentos">
-                    <i class="far fa-fw fa-file-alt"></i>
-                    <span>Documentos</span>
-                </a>
-                <div id="collapseDocumentos" class="collapse" aria-labelledby="headingDocumentos"
-                    data-parent="#accordionSidebar">
-                    <div class="bg-white py-2 collapse-inner rounded">
-                        <h6 class="collapse-header">Funciones</h6>
-                        <a class="collapse-item" href="lista_doc">Lista de Documentos</a>
-                        <a class="collapse-item" href="lista_doc">Subir Documentos</a>
-
-                    </div>
-                </div>
-            </li>
-            <!-- Fin Menu Documentos -->
-
-            <!-- Menu de Alias Nav Item - Pages Collapse Menu -->
-            <li class="nav-item">
-                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseThree"
-                    aria-expanded="true" aria-controls="collapseThree">
-                    <i class="far fa-fw fa-clipboard"></i>
-                    <span>Alias</span>
-                </a>
-                <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#accordionSidebar">
-                    <div class="bg-white py-2 collapse-inner rounded">
-                        <h6 class="collapse-header">Funciones:</h6>
-                        <a class="collapse-item" href="list_alias">Listado Alias</a>
-                        <a class="collapse-item" href="list_alias">Crear Alias</a>
-                    
-                    </div>
-                </div>
-            </li>
-             <!--Fin Menu de Alias -->
-                <!-- Sidebar Toggler (boton retractor de menu) -->
-                <div class="text-center d-none d-md-inline">
-                    <button class="rounded-circle border-0" id="sidebarToggle"></button>
-     </li>
-            </ul> <!-- Fin Sidebar (menu lateral) -->
-<!-- INICIO PAGINA -->
-<div id="content-wrapper" class="d-flex flex-column">
-                <div id="content"> <!-- Content -->
-                        <!-- Topbar -->
-                        <nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
-                    
-                            <!-- Sidebar Toggle (Topbar) -->
-                            <button id="sidebarToggleTop" class="btn btn-link d-md-none rounded-circle mr-3">
-                                <i class="fa fa-file"></i>
-                            </button>
-                                
-                                <!-- Topbar Navbar -->
-                                <ul class="navbar-nav ml-auto">
-                                    <div class="topbar-divider d-none d-sm-block"></div>
-                                    <!-- Nav Item - User Information -->
-                                        <li class="nav-item dropdown no-arrow">
-                                            <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
-                                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                                <span class="mr-2 d-none d-lg-inline text-gray-600 small">Alvaro Flores</span>
-                                                <img class="img-profile rounded-circle"
-                                                    src="{{url_for('static', filename='estilos/img/undraw_profile.svg')}}">
-                                            </a>
-                                            <!-- Dropdown - User Information -->
-                                            <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
-                                                aria-labelledby="userDropdown">
-                                                <a class="dropdown-item" href="#">
-                                                    <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
-                                                    Profile
-                                                </a>
-                                                <a class="dropdown-item" href="#">
-                                                    <i class="fas fa-cogs fa-sm fa-fw mr-2 text-gray-400"></i>
-                                                    Settings
-                                                </a>
-                                                <a class="dropdown-item" href="#">
-                                                    <i class="fas fa-list fa-sm fa-fw mr-2 text-gray-400"></i>
-                                                    Activity Log
-                                                </a>
-                                                <div class="dropdown-divider"></div>
-                                                    <a class="dropdown-item" href="#" data-toggle="modal" data-target="#logoutModal">
-                                                        <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
-                                                        Logout
-                                                    </a>
-                                            </div>
-                                        </li>
-                        
-                                </ul>
-                        </nav><!-- End of Topbar -->
- <!-- Editar de aqui -->
-                <!-- Begin Page Content -->
-                        <div class="container-fluid">
-                            <Br>
-                                {% with messages = get_flashed_messages() %}
-                                {% if messages %}
-                                {% for message in messages %}
-                                
-                                    <p>{{ message }}</p>
-                                {% endfor %}
-                                {% endif %}
-                                {% endwith %}
-                            <div class="card shadow mb-4">
-                                <div class="card-header py-3">
-                                    <h6 class="m-0 font-weight-bold text-primary">Alias</h6>
-                                </div>
-                                
-                                <div class="card-body">
-                                    <div class="table-responsive">
-                                        <table class="table table-bordered border-left-primary" id="dataTable1" width="100%" cellspacing="0">
-                                            <thead>
-                                                <tr>
-                                                    <th class="text-success">Crear Alias</th>
-                                            </thead>
-<!--   <tfoot>
-                                                <input class="btn btn-warning btn-sm" type="reset" value="Borrar">
-                                            </tfoot> -->
-                                            <tbody>
-                                                <tr>
-                                                    
-                                                <td>
-                                                    <form action="/add_alias" method="POST">
-                                                        <p class="text-primary">Nombre: <input  type="text" name="fullname" min="40"  placeholder="Nombre"></p>
-                                                        <p class="text-primary">Apellido: <input type="text" name="apellido" min="40" placeholder="Apellido"></p>
-                                                        <p>
-                                                            
-                                                            <input class="btn btn-success btn-sm " type="submit" value="Guardar">
-                                                        </p>
-                                                    </form>
-                                                </td>
-                                                    <!--  <td>2011/04/25</td>
-                                                    <td>$320,800</td> -->
-                                                </tr>
-
-                                            </tbody>
-                                        </table>
-                                        <table class="table table-bordered" id="dataTable2" width="100%" cellspacing="0">
-                                            <thead>
-                                                <tr>
-                                                    <th>ID</th>
-                                                    <th>Nombre</th>
-                                                    <th>Apellido</th>
-                                                    <th>Codigo</th>
-                                                    <th>Acciones</th>
-                                                </tr>
-                                            </thead>
-<!--   <tfoot>
-                                                
-                                            </tfoot> -->
-                                            <tbody>
-                                                {% for file in files %}
-                                                <tr>
-                                                    <td>
-                                                        {{ file.0 }}
-                                                    </td>
-                                                    <td>
-                                                        {{ file.1 }}
-                                                    </td>
-                                                    <td>
-                                                        {{ file.2 }}
-                                                    </td>
-                                                    <td>
-                                                        {{ file.3 }}
-                                                    </td>
-                                                    <td>
-                                                    
-                                                        <a href="#" class="btn btn-primary btn-circle btn-sm" data-toggle="modal" data-target="#borraralias">
-                                                            <i class="fas fa-trash"></i>
-                                                        </a>
-                                                    </td>
-                                                </tr>
-                                                {% endfor %}
-                                            </tbody>
-                                        </table>
-
-                                    </div> 
-                                </div>
-                            </div>
-                
-                        
-                        </div><!-- /.container-fluid --> 
-                    </div><!-- End of Main Content --> 
-
-                </div><!-- End Page Content no mover-->
-            </div><!-- Estos divs no mover-->
+<div class="container-fluid">
+    <Br>
+        {% with messages = get_flashed_messages() %}
+        {% if messages %}
+        {% for message in messages %}
+        
+            <p>{{ message }}</p>
+        {% endfor %}
+        {% endif %}
+        {% endwith %}
+    <div class="card shadow mb-4">
+        <div class="card-header py-3">
+            <h6 class="m-0 font-weight-bold text-primary">Alias</h6>
         </div>
+        
+        <div class="card-body">
+            <div class="table-responsive">
+                <table class="table table-bordered border-left-primary" id="dataTable1" width="100%" cellspacing="0">
+                    <thead>
+                        <tr>
+                            <th class="text-success">Crear Alias</th>
+                    </thead>
+<!--   <tfoot>
+                        <input class="btn btn-warning btn-sm" type="reset" value="Borrar">
+                    </tfoot> -->
+                    <tbody>
+                        <tr>
+                            
+                        <td>
+                            <form action="/add_alias" method="POST">
+                                <p class="text-primary">Nombre: <input  type="text" name="fullname" min="40"  placeholder="Nombre"></p>
+                                <p class="text-primary">Apellido: <input type="text" name="apellido" min="40" placeholder="Apellido"></p>
+                                <p>
+                                    
+                                    <input class="btn btn-success btn-sm " type="submit" value="Guardar">
+                                </p>
+                            </form>
+                        </td>
+                            <!--  <td>2011/04/25</td>
+                            <td>$320,800</td> -->
+                        </tr>
 
+                    </tbody>
+                </table>
+                <table class="table table-bordered" id="dataTable2" width="100%" cellspacing="0">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Nombre</th>
+                            <th>Apellido</th>
+                            <th>Codigo</th>
+                            <th>Acciones</th>
+                        </tr>
+                    </thead>
+<!--   <tfoot>
+                        
+                    </tfoot> -->
+                    <tbody>
+                        {% for file in files %}
+                        <tr>
+                            <td>
+                                {{ file.0 }}
+                            </td>
+                            <td>
+                                {{ file.1 }}
+                            </td>
+                            <td>
+                                {{ file.2 }}
+                            </td>
+                            <td>
+                                {{ file.3 }}
+                            </td>
+                            <td>
+                            
+                                <a href="#" class="btn btn-primary btn-circle btn-sm" data-toggle="modal" data-target="#borraralias">
+                                    <i class="fas fa-trash"></i>
+                                </a>
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+
+            </div> 
+        </div>
     </div>
 
-    <a class="scroll-to-top rounded" href="#page-top">
-        <i class="fas fa-angle-up"></i>
-    </a>
-</div><!-- fin primer div wrapper-->
-            <!-- Footer -->
-            <footer class="sticky-footer bg-white">
-                <div class="container my-auto">
-                    <div class="copyright text-center my-auto">
-                        <span>Copyright &copy; AUGUR <sup>2022</sup></span>
-                    </div>
-                </div>
-            </footer>
-            <!-- End of Footer -->
-    <!-- Scroll to Top Button-->
 
 </div>
-    <!-- Borrar alias Modal-->
-    <div class="modal fade" id="borraralias" tabindex="-1" role="dialog" aria-labelledby="BorraraliasModal"
-        aria-hidden="true">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="BorraraliasModal">Borrar Archivo</h5>
-                    <button class="close" type="button" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">×</span>
-                    </button>
-                </div>
-                <div class="modal-body">Seguro quiere borrar ....</div>
-                <div class="modal-footer">
-                    <form >
-                        <input type="reset" value="Borrar">
-                    </form>
-                    <button class="btn btn-danger" type="button" data-dismiss="modal">Cancel</button>
-                </div>
-            </div>
-        </div>
-    </div>
-        <!-- Logout Modal-->
-        <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-        aria-hidden="true">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Listo para Irte?</h5>
-                    <button class="close" type="button" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">×</span>
-                    </button>
-                </div>
-                <div class="modal-body">Seleccione "Logout" a continuación si está listo para finalizar su sesión actual.</div>
-                <div class="modal-footer">
-                    <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-                    <a class="btn btn-primary" href="/login">Logout</a>
-                </div>
-            </div>
-        </div>
-    </div>
-<!-- AQUI COMIENZA TERMINA CONTENIDO-->
-    <!-- Bootstrap core JavaScript-->
-    <script src="{{url_for('static', filename='estilos/vendor/jquery/jquery.min.js')}}"></script>
-    <script src="{{url_for('static', filename='estilos/vendor/bootstrap/js/bootstrap.bundle.min.js')}}"></script>
-
-    <!-- Core plugin JavaScript-->
-    <script src="{{url_for('static', filename='estilos/vendor/jquery-easing/jquery.easing.min.js')}}"></script>
-
-    <!-- Custom scripts for all pages-->
-    <script src="{{url_for('static', filename='estilos/js/sb-admin-2.min.js')}}"></script>
-
-    <!-- Page level plugins -->
-    <script src="{{url_for('static', filename='estilos/vendor/chart.js/Chart.min.js')}}"></script>
-    <!-- Page level plugins -->
-    <script src="{{url_for('static', filename='estilos/vendor/datatables/jquery.dataTables.min.js')}}"></script>
-    <script src="{{url_for('static', filename='estilos/vendor/datatables/dataTables.bootstrap4.min.js')}}"></script>
-
-    <!-- Page level custom scripts -->
-    <script src="{{url_for('static', filename='estilos/js/demo/chart-area-demo.js')}}"></script>
-    <script src="{{url_for('static', filename='estilos/js/demo/chart-pie-demo.js')}}"></script>
-
-</body>
-
-</html>
+{%endblock%}
