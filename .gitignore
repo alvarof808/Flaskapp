@@ -1,6 +1,6 @@
 node_modules
 templates/iniciales
-static/uploads/doc_marcados/**
-static/uploads/documentos/**
-static/uploads/imgs/**
-static/uploads/pdf/**
+static/uploads/doc_marcados/*
+static/uploads/documentos/*
+static/uploads/imgs/*
+static/uploads/pdf/*
